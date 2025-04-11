@@ -4,6 +4,20 @@
   box-sizing: border-box;
 }
 
+footer a {
+  color: #4e5fff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+
+footer a:hover {
+  background-color: rgba(78, 95, 255, 0.1);
+  transform: translateY(-2px);
+}
+
 body {
   font-family: 'Arial', sans-serif;
   background: #f0f4f8;
