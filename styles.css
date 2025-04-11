@@ -45,3 +45,27 @@ body {
 .btn:focus {
   outline: none;
 }
+
+.arrow-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 0;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.arrow {
+  font-size: 36px;
+  color: #4e5fff;
+  cursor: default;
+  text-align: center;
+  display: block;
+  width: 100%;
+  line-height: 36px;
+  margin: 0 auto;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
