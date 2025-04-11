@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>hello world</title>
+  <title>网易云会员领取</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="button-container">
-    <p>更新时间：2025年4月1日</p>
+    <p>更新时间：2025年4月12日</p>
     <button class="btn" data-url="https://music.163.com/prime/m/gift-receive?p=L6nT3QCeR1IIMmDGdB5lVHkfu-eg5Vw05i8--Vzod-vCfsGwoL0JZEwfK3NDJvC-vRUyvY4_49kKG_vo6cnjBEWtqBRvw1bMp0DlMVg-F9g&d=nw7GPYRlsUdF1BABbughmQ">7天会员礼品卡</button>
     <p style="text-align: center">↓</p>
     <button class="btn" data-url="http://163cn.tv/DHLE4aU">88天黑胶会员(测试)</button>
@@ -22,50 +22,36 @@
   </div>
 
   <script>
-    // 为所有按钮添加点击事件
     document.querySelectorAll('.btn').forEach(function(button) {
       button.addEventListener('click', function(e) {
-        // 阻止默认行为
         e.preventDefault();
         
-        // 获取按钮上的URL
         const link = this.getAttribute('data-url');
         
-        // 网易云音乐的包名
         const packageName = 'com.netease.cloudmusic';
         
-        // 检测设备类型
         const userAgent = navigator.userAgent.toLowerCase();
         let appUrl;
         
         if (userAgent.indexOf('android') > -1) {
-          // Android设备使用intent格式
           appUrl = `intent://${new URL(link).host}${new URL(link).pathname}?${new URL(link).search.substring(1)}#Intent;scheme=${new URL(link).protocol.replace(':', '')};package=${packageName};end`;
         } else if (userAgent.indexOf('iphone') > -1 || userAgent.indexOf('ipad') > -1 || userAgent.indexOf('ipod') > -1) {
-          // iOS设备使用自定义URL Scheme
           appUrl = `orpheus://${new URL(link).host}${new URL(link).pathname}?${new URL(link).search.substring(1)}`;
         } else {
-          // 其他设备直接使用原始链接
           appUrl = link;
         }
         
-        // 记录当前时间，用于判断是否打开成功
         const startTime = new Date().getTime();
         
-        // 尝试打开应用
         window.location.href = appUrl;
         
-        // 提示用户可能需要允许打开应用
         setTimeout(function() {
           alert('正在尝试打开网易云音乐应用，如果应用没有自动打开，请检查浏览器设置或手动打开应用。');
         }, 1000);
         
-        // 设置超时时间，如果3秒后应用仍未打开，则直接打开网站链接
         setTimeout(function() {
-          // 检查页面是否仍然可见（如果应用已打开，页面应该不可见）
           if (document.visibilityState === 'visible') {
             console.log('应用打开失败，正在打开网站链接...');
-            // 直接打开原始链接
             window.location.href = link;
           }
         }, 3000);
