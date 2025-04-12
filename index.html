@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>网易云会员领取</title>
+  <link rel="icon" href="https://110902.xyz/images/1.png">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -22,6 +23,21 @@
   </div>
 
   <script>
+    // 检测QQ和微信浏览器
+    window.onload = function() {
+      const userAgent = navigator.userAgent.toLowerCase();
+      // 更精确地检测QQ浏览器
+      const isQQBrowser = /mqqbrowser|qqbrowser/i.test(userAgent) || (/qq/i.test(userAgent) && !/micromessenger/i.test(userAgent));
+      const isWechat = /micromessenger/i.test(userAgent);
+      
+      if (isWechat || isQQBrowser) {
+        // 使用更可靠的方式显示弹窗
+        setTimeout(function() {
+          alert('检测到您正在使用' + (isWechat ? '微信' : 'QQ') + '内置浏览器，为了更好的体验，请使用系统浏览器打开本页面。');
+        }, 300);
+      }
+    };
+    
     // 处理抖音链接点击事件
     document.getElementById('douyinLink').addEventListener('click', function(e) {
       e.preventDefault();
