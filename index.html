@@ -9,8 +9,7 @@
 </head>
 <body>
   <div class="button-container">
-    <p style="text-align: center">更新时间：2026年1月28日</p>
-    <!-- 按钮区 -->
+    <p style="text-align: center">更新时间：2026年1月27日</p>
     <button class="btn" data-url="https://163cn.tv/Y8H9dwt">黑胶会员</button>
     <p style="text-align: center"></p>
     <button class="btn" data-url="URL">无</button>
@@ -41,7 +40,7 @@
       }
     };
     
-    // 处理抖音链接点击事件（保留你原有逻辑）
+    // 处理抖音链接点击事件
     document.getElementById('douyinLink').addEventListener('click', function(e) {
       e.preventDefault();
       
@@ -73,25 +72,17 @@
       }, 3000);
     });
     
-    // 添加接口地址常量
-    const API_URL = 'https://bdyx.ct.ws/api.php?nr=wyy';
-    
-    // 为所有 .btn 按钮的现有点击事件中，合并接口请求（保留原有跳转逻辑）
     document.querySelectorAll('.btn').forEach(function(button) {
       button.addEventListener('click', function(e) {
         e.preventDefault();
-    
-        // 发送接口请求；no-cors 确保跨域下请求能发出，不影响后续操作
-        fetch(API_URL, { method: 'GET', mode: 'no-cors' })
-          .catch(function (err) {
-            console.warn('请求接口出现问题，但不会影响按钮原有行为：', err);
-          });
-    
+        
         const link = this.getAttribute('data-url');
+        
         const packageName = 'com.netease.cloudmusic';
+        
         const userAgent = navigator.userAgent.toLowerCase();
         let appUrl;
-    
+        
         if (userAgent.indexOf('android') > -1) {
           appUrl = `intent://${new URL(link).host}${new URL(link).pathname}?${new URL(link).search.substring(1)}#Intent;scheme=${new URL(link).protocol.replace(':', '')};package=${packageName};end`;
         } else if (userAgent.indexOf('iphone') > -1 || userAgent.indexOf('ipad') > -1 || userAgent.indexOf('ipod') > -1) {
@@ -99,13 +90,15 @@
         } else {
           appUrl = link;
         }
-    
+        
+        const startTime = new Date().getTime();
+        
         window.location.href = appUrl;
-    
+        
         setTimeout(function() {
           alert('正在尝试打开网易云音乐应用，如果应用没有自动打开，请检查浏览器设置或手动打开应用。');
         }, 1000);
-    
+        
         setTimeout(function() {
           if (document.visibilityState === 'visible') {
             console.log('应用打开失败，正在打开网站链接...');
@@ -113,6 +106,10 @@
           }
         }, 3000);
       });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        const url = 'https://bdyx.ct.ws/api.php?nr=wyy';
+        fetch(url, { method: 'GET', mode: 'no-cors' })       
     });
   </script>
 </body>
